@@ -44,7 +44,7 @@ public class VentanaSaludo extends JFrame {
     }
 
     private void setupListeners() {
-        // Agregado un KeyListener para el evento de presionar la tecla "Enter" en el campo de texto.
+        // Añade un KeyListener para detectar cuando se presiona la tecla Enter.
         campoTexto.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -54,7 +54,7 @@ public class VentanaSaludo extends JFrame {
             }
         });
 
-        // El ActionListener del botón llama al método saludar().
+        // Añade un ActionListener al botón.
         botonSaludar.addActionListener(e -> saludar());
     }
 
