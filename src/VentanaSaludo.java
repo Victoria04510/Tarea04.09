@@ -10,7 +10,6 @@ public class VentanaSaludo extends JFrame {
     private JTextField campoTexto;
     private JButton botonSaludar;
     private JLabel etiquetaSaludo;
-    private JButton botonLimpiar;
 
     public VentanaSaludo() {
         super("App de Saludo ICC490");
@@ -19,6 +18,7 @@ public class VentanaSaludo extends JFrame {
         this.setLayout(null);
         this.setLocationRelativeTo(null);
 
+        // Métodos auxiliares para organizar el código
         initializeComponents();
         addComponentsToFrame();
         setupListeners();
@@ -33,50 +33,21 @@ public class VentanaSaludo extends JFrame {
 
         etiquetaSaludo = new JLabel("");
         etiquetaSaludo.setBounds(50, 80, 300, 25);
-
-        botonLimpiar = new JButton("Limpiar");
-        botonLimpiar.setBounds(50, 120, 100, 25);
-
-        this.getContentPane().setBackground(Color.decode("#ADD8E6"));
-        etiquetaSaludo.setFont(new Font("Arial", Font.BOLD, 14));
     }
 
     private void addComponentsToFrame() {
         this.add(campoTexto);
         this.add(botonSaludar);
         this.add(etiquetaSaludo);
-        this.add(botonLimpiar);
     }
 
     private void setupListeners() {
         botonSaludar.addActionListener(e -> saludar());
-
-        campoTexto.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    saludar();
-                }
-            }
-        });
-
-        botonLimpiar.addActionListener(e -> limpiar());
     }
 
     private void saludar() {
         String nombre = campoTexto.getText().trim();
-        if (nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingresa tu nombre.");
-            etiquetaSaludo.setText("");
-        } else {
-            Usuario usuario = new Usuario(nombre);
-            etiquetaSaludo.setText(usuario.getSaludo());
-        }
-    }
-
-    private void limpiar() {
-        campoTexto.setText("");
-        etiquetaSaludo.setText("");
+        etiquetaSaludo.setText("Hola, " + nombre);
     }
 
     public static void main(String[] args) {
