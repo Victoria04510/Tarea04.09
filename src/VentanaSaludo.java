@@ -18,7 +18,6 @@ public class VentanaSaludo extends JFrame {
         this.setLayout(null);
         this.setLocationRelativeTo(null);
 
-        // Métodos auxiliares para organizar el código
         initializeComponents();
         addComponentsToFrame();
         setupListeners();
@@ -33,6 +32,9 @@ public class VentanaSaludo extends JFrame {
 
         etiquetaSaludo = new JLabel("");
         etiquetaSaludo.setBounds(50, 80, 300, 25);
+
+        this.getContentPane().setBackground(Color.decode("#ADD8E6"));
+        etiquetaSaludo.setFont(new Font("Arial", Font.BOLD, 14));
     }
 
     private void addComponentsToFrame() {
@@ -42,12 +44,28 @@ public class VentanaSaludo extends JFrame {
     }
 
     private void setupListeners() {
+        // Agregado un KeyListener para el evento de presionar la tecla "Enter" en el campo de texto.
+        campoTexto.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    saludar();
+                }
+            }
+        });
+
+        // El ActionListener del botón llama al método saludar().
         botonSaludar.addActionListener(e -> saludar());
     }
 
     private void saludar() {
         String nombre = campoTexto.getText().trim();
-        etiquetaSaludo.setText("Hola, " + nombre);
+        if (nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa tu nombre.");
+            etiquetaSaludo.setText("");
+        } else {
+            etiquetaSaludo.setText("¡Hola, " + nombre + "!");
+        }
     }
 
     public static void main(String[] args) {
